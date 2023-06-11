@@ -5,7 +5,7 @@ public:
         
         while(l<=r)
         {
-            mid= (l+r)/2;
+            mid= l + (r-l)/2;
             if(letters[mid]<=target)
             {
                 l= mid+1;
@@ -15,6 +15,7 @@ public:
                 r= mid-1;
             }
         }
+        cout<<l <<endl;
         return l==letters.size() ? letters[0] : letters[l];
     }
 };
