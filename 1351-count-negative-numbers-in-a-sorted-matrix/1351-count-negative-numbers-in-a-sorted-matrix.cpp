@@ -1,16 +1,34 @@
 class Solution {
 public:
-    int countNegatives(vector<vector<int>>& grid) {
-        int c=0;
-        for(int i=0 ; i< grid.size(); i++)
+    int search(vector<int>& nums, int target) {
+        int l = 0, r = nums.size()-1, mid;
+        while(l<=r)
         {
-            for(int j= grid[0].size()-1; j>=0 ; j--)
+            mid = (r-l)/2 + l;
+            if(nums[mid]==target)
             {
-                if(grid[i][j]<0)  c++;
-                else break;
+                return mid;
             }
+            else if(nums[mid]<target)
+            {
+                l =mid+1;
+            }
+            else
+                r = mid-1;
         }
-        return c;
+        return l<=0 ? 0 : l-1 ;
         
+    }
+    int countNegatives(vector<vector<int>>& grid) {
+       
+        int count=0;
+        int n = grid[0].size();
+        for(auto& row : grid)
+        {
+            int index = upper_bound(row.begin(), row.end(),0, greater<int>()) - row.begin();//search(row , 0);
+            cout<<index<<" ";
+            count+= (n-index);
+        }
+        return count;
     }
 };
